@@ -23,3 +23,6 @@ class House(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_transaction_identifier(self):
+        return self.transaction_identifier
