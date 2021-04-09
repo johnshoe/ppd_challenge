@@ -28,24 +28,6 @@ class HouseByIdView(generics.RetrieveAPIView):
         return queryset
 
 
-class HouseByDateView(generics.RetrieveAPIView):
-    serializer_class = HouseSerializer
-
-    def get_queryset(self):
-        drange = self.kwargs['pk']
-        print("drange: " + drange)
-        splitted_attr = drange.split('_')
-        start_date = datetime.strptime(splitted_attr[0], "%Y-%m-%d %H:%M")
-        end_date = datetime.strptime(splitted_attr[1], "%Y-%m-%d %H:%M")
-        print("StartDate: " + str(start_date))
-        print("EndDate: " + str(end_date))
-        queryset = House.objects.extra(select={'date_of_transfer': 'cast(price as date)'},
-                                       where=['date_of_transfer > %s',
-                                              'date_of_transfer < %s'],
-                                       params=[start_date, end_date])
-        return queryset
-
-
 class HouseAddView(generics.CreateAPIView):
     queryset = House.objects.all()
     serializer_class = HouseSerializer

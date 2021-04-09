@@ -5,7 +5,7 @@ class House(models.Model):
     transaction_identifier = models.CharField(
         max_length=80, default="", unique=True)
     price = models.CharField(max_length=12, null=True,)
-    date_of_transfer = models.CharField(max_length=30, null=True,)
+    date_of_transfer = models.DateTimeField(null=True,)
     postal_code = models.CharField(max_length=12, null=True,)
     property_type = models.CharField(max_length=2, null=True,)
     old_new = models.CharField(max_length=2, null=True,)

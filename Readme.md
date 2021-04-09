@@ -184,8 +184,6 @@ I used Django Rest Framework, so the swagger it's implemented.
 
 ##### [GET] api/houses/
 
-Result example:
-
 JSON Result example:
 
 ```
@@ -259,8 +257,40 @@ Example request: api/houses?transaction_identifier\_\_iexact={BC8936BC-0425-0E2C
 ##### [GET] api/houses?drange=...
 
 Example request: \
-api/houses?drange=2021-01-08%2000:00\*2021-01-08%2000:00
-Two date separated by '\_'
+api/houses?start=2021-02-08T00:00:00Z&end=2021-04-08T00:00:00Z
+
+JSON Result example:
+
+```
+{
+    "count": 11612,
+    "next": "http://localhost:8000/api/houses/?limit=20&offset=20",
+    "previous": null,
+    "results": [
+        {
+            "transaction_identifier": "{BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}",
+            "price": "735000",
+            "date_of_transfer": "2021-01-08 00:00",
+            "postal_code": "SE12 8QH",
+            "property_type": "T",
+            "old_new": "N",
+            "duration": "F",
+            "paon": "11",
+            "saon": null,
+            "street": "AISLIBIE ROAD",
+            "locality": null,
+            "town": "LONDON",
+            "district": "LEWISHAM",
+            "country": "GREATER LONDON",
+            "ppd_cat": "A",
+            "record_stat": "A"
+        },
+      ...
+    ]
+
+}
+
+```
 
 #### Add a record
 
