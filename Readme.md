@@ -6,10 +6,11 @@ I would like you to develop a REST API for a fictional client “FooBar Inc”. 
 The raw data can be found, for free, as a CSV file here: https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads.
 
 Acceptance Criteria:
+
 - A list of all records is returned in JSON format via the REST API
 - A single record is returned in JSON format when its ID is provided
 - A list of purchase records made in a specified time range is returned in JSON format
-when a date time range is provided
+  when a date time range is provided
 
 ## Solution - Django framework
 
@@ -179,38 +180,115 @@ I used Django Rest Framework, so the swagger it's implemented.
 
 <img width="1405" alt="Screenshot 2021-04-09 at 9 15 54" src="https://user-images.githubusercontent.com/5425780/114145124-63586600-9916-11eb-8c94-098c1c56ac5b.png">
 
-
 #### List all PPD with pagination (pagination has been set int the settings)
+
 ##### [GET] api/houses/
 
 Result example:
 
 JSON Result example:
-`[{"transaction_identifier": "{BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}", "price": "735000", "date_of_transfer": "2021-01-08 00:00", "postal_code": "SE12 8QH", "property_type": "T", "old_new": "N", "duration": "F", "paon": "11", "saon": null, "street": "AISLIBIE ROAD", "locality": null, "town": "LONDON", "district": "LEWISHAM", "country": "GREATER LONDON", "ppd_cat": "A", "record_stat": "A"},{...}]`
+
+```
+{
+    "count": 11612,
+    "next": "http://localhost:8000/api/houses/?limit=20&offset=20",
+    "previous": null,
+    "results": [
+        {
+            "transaction_identifier": "{BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}",
+            "price": "735000",
+            "date_of_transfer": "2021-01-08 00:00",
+            "postal_code": "SE12 8QH",
+            "property_type": "T",
+            "old_new": "N",
+            "duration": "F",
+            "paon": "11",
+            "saon": null,
+            "street": "AISLIBIE ROAD",
+            "locality": null,
+            "town": "LONDON",
+            "district": "LEWISHAM",
+            "country": "GREATER LONDON",
+            "ppd_cat": "A",
+            "record_stat": "A"
+        },
+      ...
+    ]
+
+}
+
+```
 
 #### Get a PPD by id (primary key)
+
 ##### [GET] api/houses/1 with ID in request, but it just the primary key
 
 JSON Result example:
-`[{"transaction_identifier": "{BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}", "price": "735000", "date_of_transfer": "2021-01-08 00:00", "postal_code": "SE12 8QH", "property_type": "T", "old_new": "N", "duration": "F", "paon": "11", "saon": null, "street": "AISLIBIE ROAD", "locality": null, "town": "LONDON", "district": "LEWISHAM", "country": "GREATER LONDON", "ppd_cat": "A", "record_stat": "A"}]`
+
+```
+
+{
+    "transaction_identifier": "{BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}",
+    "price": "735000",
+    "date_of_transfer": "2021-01-08 00:00",
+    "postal_code": "SE12 8QH",
+    "property_type": "T",
+    "old_new": "N",
+    "duration": "F",
+    "paon": "11",
+    "saon": null,
+    "street": "AISLIBIE ROAD",
+    "locality": null,
+    "town": "LONDON",
+    "district": "LEWISHAM",
+    "country": "GREATER LONDON",
+    "ppd_cat": "A",
+    "record_stat": "A"
+}
+
+```
 
 #### Get a PPD by transaction identifier
+
 ##### [GET] api/houses?transaction_identifier\_\_iexact= ...
 
 Example request: api/houses?transaction_identifier\_\_iexact={BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}
 
 #### Get a PPD by filtered with purchase range (used date_of_transfer field)
+
 ##### [GET] api/houses?drange=...
 
-Example request: api/houses?drange=2021-01-08%2000:00\*2021-01-08%2000:00
+Example request: \
+api/houses?drange=2021-01-08%2000:00\*2021-01-08%2000:00
 Two date separated by '\_'
 
 #### Add a record
+
 ##### [POST] api/houses/add
 
 Exaple request body:
+
 ```
-{ "transaction_identifier": "", "price": "", "date_of_transfer": "", "postal_code": "", "property_type": "", "old_new": "", "duration": "", "paon": "", "saon": "", "street": "", "locality": "", "town": "", "district": "", "country": "", "ppd_cat": "", "record_stat": "" }
+{
+    "transaction_identifier": "",
+    "price": "",
+    "date_of_transfer": "",
+    "postal_code": "",
+    "property_type": "",
+    "old_new": "",
+    "duration": "",
+    "paon": "",
+    "saon": "",
+    "street": "",
+    "locality": "",
+    "town": "",
+    "district": "",
+    "country": "",
+    "ppd_cat": "",
+    "record_stat": ""
+}
+
+
 ```
 
 Necessary request header: Content-Type: application/json
