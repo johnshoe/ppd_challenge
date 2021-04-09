@@ -24,8 +24,6 @@ https://www.djangoproject.com/
 
 ### Get data
 
-### Setting on local environment
-
 I downloade data in csv from this page:
 https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads.
 
@@ -34,7 +32,9 @@ https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads.
 - Python 3.8 or greater
 - django, djangorestframework, django-filters
 
-### Steps
+### Setting on local environment
+
+#### Steps:
 
 1. Get the code from the repository and go into the directory
 
