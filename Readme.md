@@ -162,6 +162,13 @@ So my model fields are the following:
 
 ## API - Available endpoints:
 
+### Swagger
+
+I used Django Rest Framework, so the swagger it's implemented.
+
+<img width="1405" alt="Screenshot 2021-04-09 at 9 15 54" src="https://user-images.githubusercontent.com/5425780/114145124-63586600-9916-11eb-8c94-098c1c56ac5b.png">
+
+
 ### List all PPD with pagination (pagination has been set int the settings)
 
 #### [GET] api/houses/
