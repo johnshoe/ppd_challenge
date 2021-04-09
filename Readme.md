@@ -44,6 +44,91 @@ For this project I used SQLite3 (django default) database system, but you can us
 Currently I pushed a little imported (11612 record) databse, but it not the best practice. Please use a tool or script to
 csv import.
 
+## Authentication
+
+In this case it isn't in the requirements, but if we want to use Authentication or user management the best way the dajnago rest framework's default.
+
+Installation: \
+`pip install djangorestframework_simplejwt`
+
+Add to settings (to settings.py):\
+`REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': [ 'rest_framework_simplejwt.authentication.JWTAuthentication', ], }`
+
+And set urls (urls.py):\
+`from django.urls import path`\
+`from rest_framework_simplejwt import views as jwt_views`
+
+`urlpatterns = [ # Your URLs... path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'), path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'), ]`
+
+Use in the views example:
+
+`from rest_framework.permissions import IsAuthenticated`\
+
+`class HouseListView(APIView): `\
+ `permission_classes = (IsAuthenticated,)`
+
+For all information visi these: \
+https://github.com/jazzband/django-rest-framework-simplejwt \
+https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html
+
+## Logging
+
+If the application is grow, the logging is very important. Fortunately Django has a great solution for this problem.
+Logging in Django it very simple, just need to be set in the settings.py.
+
+Example:
+
+```
+import os
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
+
+```
+
+And usage:
+
+```
+# Log an error message
+logger.error('Something went wrong!')
+
+```
+
+And here is the offitial documentation:\
+https://docs.djangoproject.com/en/3.1/topics/logging/
+
+And also we have many other option to logging, for example:
+
+- elk (Elastic search, Logstahs, Kibana)
+- Splunk
+- Sentry (It easy to set in Django)
+
+And maybe it will be good idea, if we connect with a monitoring and alert tool. Some example:
+
+- Sentry
+- Prometheus
+- Merticly
+
+## Caching
+
+If we need many quick requests, and need search fastly, the best way if we use any indexing, caching solutions:
+
+- Redis
+- Simple database cache (sometimes is more than enough)
+- Django has an own solution memcached:
+  https://docs.djangoproject.com/en/3.1/topics/cache/
+
 ## Models
 
 ### House
@@ -75,7 +160,7 @@ So my model fields are the following:
 - currency
 - created_at
 
-## Available endpoints:
+## API - Available endpoints:
 
 ### List all PPD with pagination (pagination has been set int the settings)
 
