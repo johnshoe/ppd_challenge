@@ -16,14 +16,14 @@ when a date time range is provided
 I used Django framework for the solutions, because it very useful and.
 https://www.djangoproject.com/
 
-### Used extra modules:
+#### Used extra modules:
 
 - rest_framework
 - django_filters
 
-## Get data
+### Get data
 
-## Setting on local environment
+### Setting on local environment
 
 I downloade data in csv from this page:
 https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads.
@@ -55,7 +55,7 @@ For this project I used SQLite3 (django default) database system, but you can us
 Currently I pushed a little imported (11612 record) databse, but it not the best practice. Please use a tool or script to
 csv import.
 
-## Authentication
+### Authentication
 
 In this case it isn't in the requirements, but if we want to use Authentication or user management the best way the dajnago rest framework's default.
 
@@ -82,7 +82,7 @@ For all information visi these: \
 https://github.com/jazzband/django-rest-framework-simplejwt \
 https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html
 
-## Logging
+### Logging
 
 If the application is grow, the logging is very important. Fortunately Django has a great solution for this problem.
 Logging in Django it very simple, just need to be set in the settings.py.
@@ -131,7 +131,7 @@ And maybe it will be good idea, if we connect with a monitoring and alert tool. 
 - Prometheus
 - Merticly
 
-## Caching
+### Caching
 
 If we need many quick requests, and need search fastly, the best way if we use any indexing, caching solutions:
 
@@ -140,9 +140,9 @@ If we need many quick requests, and need search fastly, the best way if we use a
 - Django has an own solution memcached:
   https://docs.djangoproject.com/en/3.1/topics/cache/
 
-## Models
+### Models
 
-### House
+#### House
 
 The house model represents the PPD which can be available to sell.
 
@@ -171,49 +171,46 @@ So my model fields are the following:
 - currency
 - created_at
 
-## API - Available endpoints:
+### API - Available endpoints:
 
-### Swagger
+#### Swagger
 
 I used Django Rest Framework, so the swagger it's implemented.
 
 <img width="1405" alt="Screenshot 2021-04-09 at 9 15 54" src="https://user-images.githubusercontent.com/5425780/114145124-63586600-9916-11eb-8c94-098c1c56ac5b.png">
 
 
-### List all PPD with pagination (pagination has been set int the settings)
-
-#### [GET] api/houses/
+#### List all PPD with pagination (pagination has been set int the settings)
+##### [GET] api/houses/
 
 Result example:
 
 JSON Result example:
 `[{"transaction_identifier": "{BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}", "price": "735000", "date_of_transfer": "2021-01-08 00:00", "postal_code": "SE12 8QH", "property_type": "T", "old_new": "N", "duration": "F", "paon": "11", "saon": null, "street": "AISLIBIE ROAD", "locality": null, "town": "LONDON", "district": "LEWISHAM", "country": "GREATER LONDON", "ppd_cat": "A", "record_stat": "A"},{...}]`
 
-### Get a PPD by id (primary key)
-
-#### [GET] api/houses/1 with ID in request, but it just the primary key
+#### Get a PPD by id (primary key)
+##### [GET] api/houses/1 with ID in request, but it just the primary key
 
 JSON Result example:
 `[{"transaction_identifier": "{BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}", "price": "735000", "date_of_transfer": "2021-01-08 00:00", "postal_code": "SE12 8QH", "property_type": "T", "old_new": "N", "duration": "F", "paon": "11", "saon": null, "street": "AISLIBIE ROAD", "locality": null, "town": "LONDON", "district": "LEWISHAM", "country": "GREATER LONDON", "ppd_cat": "A", "record_stat": "A"}]`
 
-### Get a PPD by transaction identifier
-
-#### [GET] api/houses?transaction_identifier\_\_iexact= ...
+#### Get a PPD by transaction identifier
+##### [GET] api/houses?transaction_identifier\_\_iexact= ...
 
 Example request: api/houses?transaction_identifier\_\_iexact={BC8936BC-0425-0E2C-E053-6C04A8C0DBF4}
 
-### Get a PPD by filtered with purchase range (used date_of_transfer field)
-
-#### [GET] api/houses?drange=...
+#### Get a PPD by filtered with purchase range (used date_of_transfer field)
+##### [GET] api/houses?drange=...
 
 Example request: api/houses?drange=2021-01-08%2000:00\*2021-01-08%2000:00
 Two date separated by '\_'
 
-### Add a record
-
-#### [POST] api/houses/add
+#### Add a record
+##### [POST] api/houses/add
 
 Exaple request body:
-`{ "transaction_identifier": "", "price": "", "date_of_transfer": "", "postal_code": "", "property_type": "", "old_new": "", "duration": "", "paon": "", "saon": "", "street": "", "locality": "", "town": "", "district": "", "country": "", "ppd_cat": "", "record_stat": "" }`
+```
+{ "transaction_identifier": "", "price": "", "date_of_transfer": "", "postal_code": "", "property_type": "", "old_new": "", "duration": "", "paon": "", "saon": "", "street": "", "locality": "", "town": "", "district": "", "country": "", "ppd_cat": "", "record_stat": "" }
+```
 
 Necessary request header: Content-Type: application/json
