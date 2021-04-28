@@ -45,7 +45,7 @@ https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads.
 3. Activate virtual environment: `source venv/bin/activate`
 
 4. Install necessarry packages with pip:
-   `pip install django djangorestframework, django-filters`
+   `pip install django djangorestframework django-filter`
 
 5. Run migration:
    `./managepy migrate`
